@@ -61,7 +61,7 @@ def unitRamp(lb, ub):
             x_n.append(i)
             
     x_n =np.array(x_n)
-    
+    drawSignal(n,x_n)
     return (n, x_n)
 
 def timeShifting(originalSignal, shiftingAmount):
@@ -85,14 +85,8 @@ def timeShifting(originalSignal, shiftingAmount):
         y_n[ 0 : n.shape[0]+shiftingAmount ] = dataToCopy
     else:
         y_n=x_n
-        
+    drawSignal(n,y_n)   
     return (n,y_n)
-
-
-
-    
-    
-    
 
 def Mirroring(originalSignal):
     n,x_n = originalSignal
@@ -116,7 +110,7 @@ def Mirroring(originalSignal):
     
     
     y_n = np.array(y_n)
-    
+    drawSignal(n,y_n)
     return (n,y_n)
 
 def Downsampling(originalSignal, T):
@@ -140,6 +134,7 @@ def Downsampling(originalSignal, T):
         else:
             y_n.append(temp[T*i])
     y_n = np.array(y_n)
+    drawSignal(n,y_n)
     return (n,y_n)
 
 
@@ -147,6 +142,7 @@ def Scaling(originalSignal, A):
     n,x_n = originalSignal
     y_n = A * x_n
     y_n = np.array(y_n)
+    drawSignal(n,y_n)
     return (n,y_n)
 
 def Operations(first , second , operation):
@@ -189,34 +185,34 @@ def Operations(first , second , operation):
         y_n = arr1 * arr2
    
     y_n = np.array(y_n)
+    drawSignal(n,y_n)
     return (n,y_n)
 
 def inputFunction():
-    file = open("input.txt","r")
-    test_case = int(file.readline())
+    test_case = int(input("Enter Number of test case : "))
     for j in range(0,test_case):
-        parts = int(file.readline())
+        parts = int(input("Enter Number of parts : "))
         for k in range(0,parts):
             if k != 0:
-                parts_operator = int(file.readline())
-            lowerBound = int(file.readline())
-            upperBound = int(file.readline())
-            component = int(file.readline())
+                parts_operator = int(input("Enter the part operator type (1 = add, 2 = sub, 3 = mul) : "))
+            lowerBound = int(input("Enter lower bound : "))
+            upperBound = int(input("Enter upper bound : "))
+            component = int(input("Enter the number of component : "))
             for i in range(0,component):
                 if i != 0:
-                    operator = int(file.readline())
+                    operator = int(input("Enter the operator type (1 = add, 2 = sub, 3 = mul) : "))
                 
-                scaling = int(file.readline())
+                scaling = int(input("Enter the scaling number : "))
                 
-                signalType = int(file.readline())
-                time_shifting = int(file.readline())
+                signalType = int(input("Enter signal type (1 = impulse, 2 = step, 3 = ramp) : " ) )
+                time_shifting = int(input(" the component has any shifting operation (1 = yes, 2 = no) : "))
                 if time_shifting == 1 :
-                    shiftAmount = int(file.readline())
+                    shiftAmount = int(input("Enter shifting amount (positive number denotes signal delay, negative number denotes signal advances, zero means no shifting) : " ) ) 
                
-                mirroring = int(file.readline())
-                downsampling = int(file.readline())
+                mirroring = int(input(" the component has any mirroring operation (1 = yes, 2 = no) : "))
+                downsampling = int(input(" the component has any downsampling operation (1 = yes, 2 = no) : "))
                 if downsampling == 1:
-                    T = int(file.readline())
+                    T = int(input("Enter downsampling amount : "))
             
             
                 output = []
@@ -241,6 +237,7 @@ def inputFunction():
                         u = Downsampling(u,T)
                     if mirroring == 1:
                         u = Mirroring(u)
+                    
                     output = u
                 else:
                     Ur = unitRamp(lowerBound,upperBound)
@@ -278,6 +275,16 @@ def inputFunction():
     
     return 
 if __name__== "__main__":
-     
+    
     inputFunction()
     
+    '''
+    #shiftingOutput = Downsampling(delta,1)
+    
+    delta = unitRamp(0, 10)
+    print(delta[0],delta[1])
+    drawSignal(delta[0],delta[1])
+    shiftingOutput = Downsampling(delta,2)
+    print(shiftingOutput[0],shiftingOutput[1])
+    drawSignal(shiftingOutput[0],shiftingOutput[1])
+    '''

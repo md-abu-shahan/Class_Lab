@@ -1,0 +1,5 @@
+abstractareas.Rectangle
+abstractareas.Rextangle
+abstractareas.Triangle
+abstractareas.Figure
+abstractareas.Abstractareas

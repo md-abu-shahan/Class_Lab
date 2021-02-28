@@ -1,0 +1,8 @@
+Hello= Greeting.
+Today= This Day.
+Tomorrow= The next day.
+Yesterday= The previous day.
+Shahan= Rajputro.
+Hanif= The cuty boy.
+ID= 170103020017.
+Hobby= programmer.

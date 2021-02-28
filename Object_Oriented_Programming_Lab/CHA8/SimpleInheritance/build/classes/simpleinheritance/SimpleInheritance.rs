@@ -1,0 +1,3 @@
+simpleinheritance.SimpleInheritance
+simpleinheritance.B
+simpleinheritance.A
